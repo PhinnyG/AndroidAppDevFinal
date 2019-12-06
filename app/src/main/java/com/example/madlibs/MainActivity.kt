@@ -1,11 +1,9 @@
 package com.example.madlibs
 
-import android.content.res.AssetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,27 +11,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val story = stories[0].toWords()
-        val storyWords = storiesWords[0].toWords()
-
-        fun createStory(story: MutableList<String>, words: MutableList<String>): String {
-            var location = 0
-            var finished = ""
-            story.forEach() {
-                if(it.equals("*")) {
-                    finished += words[location] + " "
-                    location++
-                }
-                else {
-                    finished += it + " "
-                }
-            }
-            return finished
-        }
+        var rand = randomNum()
+        var story = stories[rand].toWords()
+        var storyWords = storiesWords[rand].toWords()
 
         WordType.text = storyWords[0]
         var location = 0
-
 
         EnterButton.setOnClickListener {
             if (WordField.text.toString().equals("")) {
@@ -63,9 +46,42 @@ class MainActivity : AppCompatActivity() {
             WordType.setVisibility(View.VISIBLE)
             WordType.textSize = 20f
             HypeMessage.setVisibility(View.INVISIBLE)
+            PlayAgainButton.setVisibility(View.VISIBLE)
+        }
+
+        PlayAgainButton.setOnClickListener {
+            rand = randomNum()
+            story = stories[rand].toWords()
+            storyWords = storiesWords[rand].toWords()
+            EnterButton.setVisibility(View.VISIBLE)
+            Label.setVisibility(View.VISIBLE)
+            WordField.setVisibility(View.VISIBLE)
+            WordType.setVisibility(View.VISIBLE)
+            WordType.text = storyWords[0]
+            location = 0
+            PlayAgainButton.setVisibility(View.INVISIBLE)
         }
 
 
+    }
+
+    fun createStory(story: MutableList<String>, words: MutableList<String>): String {
+        var location = 0
+        var finished = ""
+        story.forEach() {
+            if(it.equals("*")) {
+                finished += words[location] + " "
+                location++
+            }
+            else {
+                finished += it + " "
+            }
+        }
+        return finished
+    }
+
+    fun randomNum(): Int {
+        return (0..(stories.size-1)).random()
     }
 
     fun String.toWords() = trim().splitToSequence(' ').filter { it.isNotEmpty() }.toMutableList()
