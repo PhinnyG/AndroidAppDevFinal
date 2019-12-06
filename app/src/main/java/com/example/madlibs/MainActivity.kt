@@ -11,13 +11,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var rand = randomNum()
-        var story = stories[rand].toWords()
-        var storyWords = storiesWords[rand].toWords()
+        var story = getStory()
+        var storyWords = getStoryWords()
 
         WordType.text = storyWords[0]
         var location = 0
 
+        //stores the users input into the index of the story words array that was being prompted for
+        //changes layout of screen if there are no more words to be prompted for
         EnterButton.setOnClickListener {
             if (WordField.text.toString().equals("")) {
                 WordField.hint = "ENTER WORD"
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //reveals the completed madlib as text to the user
         ContinueButton.setOnClickListener {
             ContinueButton.setVisibility(View.INVISIBLE)
             WordType.text = createStory(story, storyWords)
@@ -49,10 +51,10 @@ class MainActivity : AppCompatActivity() {
             PlayAgainButton.setVisibility(View.VISIBLE)
         }
 
+        //resets the madlib screen to prompt for a new story
         PlayAgainButton.setOnClickListener {
-            rand = randomNum()
-            story = stories[rand].toWords()
-            storyWords = storiesWords[rand].toWords()
+            story = getStory()
+            storyWords = getStoryWords()
             EnterButton.setVisibility(View.VISIBLE)
             Label.setVisibility(View.VISIBLE)
             WordField.setVisibility(View.VISIBLE)
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //uses array logic to create a string that is the story with the user input words
     fun createStory(story: MutableList<String>, words: MutableList<String>): String {
         var location = 0
         var finished = ""
@@ -79,22 +82,4 @@ class MainActivity : AppCompatActivity() {
         }
         return finished
     }
-
-    fun randomNum(): Int {
-        return (0..(stories.size-1)).random()
-    }
-
-    fun String.toWords() = trim().splitToSequence(' ').filter { it.isNotEmpty() }.toMutableList()
-    val stories = mutableListOf("I wanna be a * just like my dad! But I don't want to have to * all day.", "One of the most * characters in fiction is named" +
-            "\"Tarzan of the * .\" Tarzan was raised by a/an" +
-            " * and lives in the * jungle in the" +
-            " heart of darkest * . He spends most of his time" +
-            " eating * and swinging from tree to * ." +
-            " Whenever he gets angry, he beats on his chest and says," +
-            "\" * !\" This is his war cry. Tarzan always dresses in" +
-            " * shorts made from the skin of a/an * " +
-            " and his best friend is a/an * chimpanzee named" +
-            " Cheetah. He is supposed to be able to speak to elephants and" +
-            " * . In the movies, Tarzan is played by * .")
-    val storiesWords = mutableListOf("Job Verb", "adjective plural-noun noun adjective place plural-noun noun funny-noise adjective noun adjective plural-noun person's-name")
 }
