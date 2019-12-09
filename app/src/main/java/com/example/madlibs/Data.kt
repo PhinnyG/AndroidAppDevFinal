@@ -29,15 +29,13 @@ fun randomNum(): Int {
     return (0..(stories.size-1)).random()
 }
 
-val stories = mutableListOf("I wanna be a * just like my dad! But I don't want to have to * all day.", "One of the most * characters in fiction is named" +
+val stories = mutableListOf("I wanna be a * just like my dad! But I don't want to have to * all day.",
+        "One of the most * characters in fiction is named " +
         "\"Tarzan of the * .\" Tarzan was raised by a/an" +
         " * and lives in the * jungle in the" +
         " heart of darkest * . He spends most of his time" +
-        " eating * and swinging from tree to * ." +
-        " Whenever he gets angry, he beats on his chest and says," +
-        "\" * !\" This is his war cry. Tarzan always dresses in" +
-        " * shorts made from the skin of a/an * " +
-        " and his best friend is a/an * chimpanzee named" +
-        " Cheetah. He is supposed to be able to speak to elephants and" +
-        " * . In the movies, Tarzan is played by * .")
-val storiesWords = mutableListOf("Job Verb", "adjective plural-noun noun adjective place plural-noun noun funny-noise adjective noun adjective plural-noun person's-name")
+        " eating * and swinging from tree to * .",
+        "If you ever see a/an * and they are * , you're in danger, they're gonna * !",
+        "There is nothing you can't fit inside a * , One time I saw someone put * * inside and it nearly burst.",
+        "Sometimes you gotta * , to get some * ")
+val storiesWords = mutableListOf("Job Verb", "Adjective Plural-noun Noun Adjective Place Plural-noun Noun", "Animal Verb-ing Verb", "Noun Number Plural-noun", "Verb Noun")

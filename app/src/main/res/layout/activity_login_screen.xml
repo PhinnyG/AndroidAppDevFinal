@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".LoginScreen">
 
-    <TextView
+    <ImageView
         android:id="@+id/LoginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to MadLibs!"
-        android:textSize="25pt"
-        android:gravity="center"
+        android:src="@drawable/madlibs_word"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +19,7 @@
         android:id="@+id/LoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go!"
+        android:text="Lets Play!"
         android:scaleX="4"
         android:scaleY="4"
         app:layout_constraintBottom_toBottomOf="parent"
